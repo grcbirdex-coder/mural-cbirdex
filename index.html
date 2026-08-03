@@ -7,31 +7,85 @@
 <title>CBirdex</title>
 
 <style>
-
-html,body{
-    margin:0;
-    padding:0;
-    background:#000;
-    overflow:hidden;
-    width:100%;
-    height:100%;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
 }
 
-video{
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
+.media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
 }
 
+.media.ativo {
+    opacity: 1;
+}
 </style>
-
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline>
+<video
+    id="video"
+    class="media ativo"
+    autoplay
+    muted
+    playsinline
+    preload="auto">
     <source src="WhatsApp Video 2026-08-03 at 12.34.00.mp4" type="video/mp4">
 </video>
+
+<img
+    id="imagem"
+    class="media"
+    src="ChatGPT Image 3 de ago. de 2026, 14_44_24.png"
+    alt="Mobilização Nacional SEST SENAT">
+
+<script>
+const video = document.getElementById("video");
+const imagem = document.getElementById("imagem");
+
+const tempoImagem = 18000;
+
+function mostrarVideo() {
+    imagem.classList.remove("ativo");
+    video.classList.add("ativo");
+
+    video.currentTime = 0;
+
+    const reproducao = video.play();
+
+    if (reproducao !== undefined) {
+        reproducao.catch(() => {});
+    }
+}
+
+function mostrarImagem() {
+    video.pause();
+    video.classList.remove("ativo");
+    imagem.classList.add("ativo");
+
+    setTimeout(mostrarVideo, tempoImagem);
+}
+
+video.addEventListener("ended", mostrarImagem);
+
+video.addEventListener("error", () => {
+    mostrarImagem();
+});
+
+mostrarVideo();
+</script>
 
 </body>
 </html>
