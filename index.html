@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CBirdex</title>
+<title>Mural CBirdex</title>
 
 <style>
 
@@ -45,11 +44,14 @@ html,body{
 <video
 id="video1"
 class="media ativo"
+autoplay
 muted
 playsinline
 preload="auto">
 
-<source src="WhatsApp Video 2026-08-03 at 12.34.00.mp4" type="video/mp4">
+<source
+src="WhatsApp Video 2026-08-03 at 12.34.00.mp4"
+type="video/mp4">
 
 </video>
 
@@ -65,7 +67,7 @@ alt="">
 
 
 
-<!-- Vídeo Vice-Campeão -->
+<!-- Vídeo Vice Campeão -->
 
 <video
 id="video2"
@@ -74,42 +76,42 @@ muted
 playsinline
 preload="auto">
 
-<source src="video vice campeao 2026.mp4" type="video/mp4">
+<source
+src="video vice campeao 2026.mp4"
+type="video/mp4">
 
 </video>
 
 
 
-<!-- Banner Vice-Campeão -->
+<!-- Banner Vice Campeão -->
 
 <img
 id="imagem2"
 class="media"
-src="mural_cbirdex_vice_campeao_750x220.jpg"
+src="ChatGPT Image 4 de ago. de 2026, 18_19_37.png"
 alt="">
 
 
 
 <script>
 
-const tempoImagem=18000;
+const tempoImagem = 18000;
 
-const video1=document.getElementById("video1");
-const imagem1=document.getElementById("imagem1");
+const video1 = document.getElementById("video1");
+const imagem1 = document.getElementById("imagem1");
 
-const video2=document.getElementById("video2");
-const imagem2=document.getElementById("imagem2");
+const video2 = document.getElementById("video2");
+const imagem2 = document.getElementById("imagem2");
 
 function esconderTudo(){
 
-    document.querySelectorAll(".media").forEach(item=>{
+    document.querySelectorAll(".media").forEach(function(item){
 
         item.classList.remove("ativo");
 
         if(item.tagName==="VIDEO"){
-
             item.pause();
-
         }
 
     });
@@ -124,11 +126,7 @@ function mostrarVideo1(){
 
     video1.currentTime=0;
 
-    video1.play().catch(()=>{
-
-        mostrarImagem1();
-
-    });
+    video1.play().catch(function(){});
 
 }
 
@@ -150,11 +148,7 @@ function mostrarVideo2(){
 
     video2.currentTime=0;
 
-    video2.play().catch(()=>{
-
-        mostrarImagem2();
-
-    });
+    video2.play().catch(function(){});
 
 }
 
@@ -168,13 +162,13 @@ function mostrarImagem2(){
 
 }
 
-video1.addEventListener("ended",mostrarImagem1);
+video1.onended = mostrarImagem1;
 
-video2.addEventListener("ended",mostrarImagem2);
+video2.onended = mostrarImagem2;
 
-video1.addEventListener("error",mostrarImagem1);
+video1.onerror = mostrarImagem1;
 
-video2.addEventListener("error",mostrarImagem2);
+video2.onerror = mostrarImagem2;
 
 mostrarVideo1();
 
