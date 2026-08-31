@@ -39,7 +39,10 @@ html,body{
 
 <body>
 
-<!-- Vídeo institucional -->
+
+<!-- ===================================================== -->
+<!-- VÍDEO 1 - INSTITUCIONAL -->
+<!-- ===================================================== -->
 
 <video
 id="video1"
@@ -56,18 +59,32 @@ type="video/mp4">
 </video>
 
 
+<!-- ===================================================== -->
+<!-- SETEMBRO AMARELO -->
+<!-- Aparece somente de 01/09/2026 00:01 até 30/09/2026 -->
+<!-- ===================================================== -->
 
-<!-- Banner Mobilização -->
+<img
+id="imagemSetembro"
+class="media"
+src="setembro-amarelo-2026.png"
+alt="Setembro Amarelo CBirdex">
+
+
+<!-- ===================================================== -->
+<!-- BANNER MOBILIZAÇÃO SEST SENAT -->
+<!-- ===================================================== -->
 
 <img
 id="imagem1"
 class="media"
 src="ChatGPT Image 3 de ago. de 2026, 14_44_24.png"
-alt="">
+alt="Mobilização Nacional SEST SENAT">
 
 
-
-<!-- Vídeo Vice Campeão -->
+<!-- ===================================================== -->
+<!-- VÍDEO VICE CAMPEÃO -->
+<!-- ===================================================== -->
 
 <video
 id="video2"
@@ -83,40 +100,114 @@ type="video/mp4">
 </video>
 
 
-
-<!-- Banner Vice Campeão -->
+<!-- ===================================================== -->
+<!-- BANNER VICE CAMPEÃO -->
+<!-- ===================================================== -->
 
 <img
 id="imagem2"
 class="media"
 src="ChatGPT Image 4 de ago. de 2026, 18_19_37.png"
-alt="">
-
+alt="CBirdex FC">
 
 
 <script>
 
+
+/* =====================================================
+   CONFIGURAÇÃO
+   ===================================================== */
+
+/*
+   Tempo dos banners em milissegundos.
+
+   18000 = 18 segundos
+*/
+
 const tempoImagem = 18000;
 
-const video1 = document.getElementById("video1");
-const imagem1 = document.getElementById("imagem1");
 
-const video2 = document.getElementById("video2");
-const imagem2 = document.getElementById("imagem2");
+/* =====================================================
+   PERÍODO DO SETEMBRO AMARELO
+   ===================================================== */
+
+/*
+   INÍCIO:
+   01/09/2026 às 00:01
+
+   FIM:
+   30/09/2026 às 23:59:59
+*/
+
+const inicioSetembro =
+    new Date("2026-09-01T00:01:00");
+
+const fimSetembro =
+    new Date("2026-09-30T23:59:59.999");
+
+
+/* =====================================================
+   ELEMENTOS
+   ===================================================== */
+
+const video1 =
+    document.getElementById("video1");
+
+const imagemSetembro =
+    document.getElementById("imagemSetembro");
+
+const imagem1 =
+    document.getElementById("imagem1");
+
+const video2 =
+    document.getElementById("video2");
+
+const imagem2 =
+    document.getElementById("imagem2");
+
+
+/* =====================================================
+   VERIFICAR SETEMBRO AMARELO
+   ===================================================== */
+
+function setembroAmareloAtivo(){
+
+    const agora = new Date();
+
+    return (
+        agora >= inicioSetembro &&
+        agora <= fimSetembro
+    );
+
+}
+
+
+/* =====================================================
+   ESCONDER TUDO
+   ===================================================== */
 
 function esconderTudo(){
 
-    document.querySelectorAll(".media").forEach(function(item){
+    document
+        .querySelectorAll(".media")
+        .forEach(function(item){
 
-        item.classList.remove("ativo");
+            item.classList.remove("ativo");
 
-        if(item.tagName==="VIDEO"){
-            item.pause();
-        }
+            if(item.tagName === "VIDEO"){
 
-    });
+                item.pause();
+
+            }
+
+        });
 
 }
+
+
+/* =====================================================
+   VÍDEO 1
+   ===================================================== */
 
 function mostrarVideo1(){
 
@@ -124,11 +215,85 @@ function mostrarVideo1(){
 
     video1.classList.add("ativo");
 
-    video1.currentTime=0;
+    video1.currentTime = 0;
 
     video1.play().catch(function(){});
 
 }
+
+
+/* =====================================================
+   DEPOIS DO VÍDEO 1
+   ===================================================== */
+
+/*
+   Durante setembro:
+   
+   Vídeo 1
+       ↓
+   Setembro Amarelo
+
+   Fora de setembro:
+
+   Vídeo 1
+       ↓
+   Mobilização
+*/
+
+function depoisDoVideo1(){
+
+    if(setembroAmareloAtivo()){
+
+        mostrarSetembro();
+
+    }else{
+
+        mostrarImagem1();
+
+    }
+
+}
+
+
+/* =====================================================
+   SETEMBRO AMARELO
+   ===================================================== */
+
+function mostrarSetembro(){
+
+    /*
+       Confere a data novamente antes de exibir.
+    */
+
+    if(!setembroAmareloAtivo()){
+
+        mostrarImagem1();
+
+        return;
+
+    }
+
+    esconderTudo();
+
+    imagemSetembro.classList.add("ativo");
+
+
+    /*
+       Mostra a campanha por 18 segundos.
+    */
+
+    setTimeout(function(){
+
+        mostrarImagem1();
+
+    }, tempoImagem);
+
+}
+
+
+/* =====================================================
+   BANNER MOBILIZAÇÃO
+   ===================================================== */
 
 function mostrarImagem1(){
 
@@ -136,9 +301,23 @@ function mostrarImagem1(){
 
     imagem1.classList.add("ativo");
 
-    setTimeout(mostrarVideo2,tempoImagem);
+
+    /*
+       Mostra o banner por 18 segundos.
+    */
+
+    setTimeout(function(){
+
+        mostrarVideo2();
+
+    }, tempoImagem);
 
 }
+
+
+/* =====================================================
+   VÍDEO VICE CAMPEÃO
+   ===================================================== */
 
 function mostrarVideo2(){
 
@@ -146,11 +325,16 @@ function mostrarVideo2(){
 
     video2.classList.add("ativo");
 
-    video2.currentTime=0;
+    video2.currentTime = 0;
 
     video2.play().catch(function(){});
 
 }
+
+
+/* =====================================================
+   BANNER VICE CAMPEÃO
+   ===================================================== */
 
 function mostrarImagem2(){
 
@@ -158,19 +342,81 @@ function mostrarImagem2(){
 
     imagem2.classList.add("ativo");
 
-    setTimeout(mostrarVideo1,tempoImagem);
+
+    /*
+       Depois do banner, volta para o vídeo 1.
+    */
+
+    setTimeout(function(){
+
+        mostrarVideo1();
+
+    }, tempoImagem);
 
 }
 
-video1.onended = mostrarImagem1;
+
+/* =====================================================
+   EVENTOS DOS VÍDEOS
+   ===================================================== */
+
+video1.onended = depoisDoVideo1;
 
 video2.onended = mostrarImagem2;
 
-video1.onerror = mostrarImagem1;
 
-video2.onerror = mostrarImagem2;
+/* =====================================================
+   TRATAMENTO DE ERRO DOS VÍDEOS
+   ===================================================== */
+
+video1.onerror = function(){
+
+    depoisDoVideo1();
+
+};
+
+video2.onerror = function(){
+
+    mostrarImagem2();
+
+};
+
+
+/* =====================================================
+   INICIAR MURAL
+   ===================================================== */
 
 mostrarVideo1();
+
+
+/* =====================================================
+   VERIFICAÇÃO AUTOMÁTICA
+   ===================================================== */
+
+/*
+   Se o mural ficar aberto durante a virada do mês,
+   verifica a cada 10 segundos se a campanha ainda
+   está dentro do período.
+*/
+
+setInterval(function(){
+
+    /*
+       Se Setembro Amarelo não estiver mais ativo
+       e estiver sendo exibido, sai imediatamente.
+    */
+
+    if(
+        !setembroAmareloAtivo() &&
+        imagemSetembro.classList.contains("ativo")
+    ){
+
+        mostrarImagem1();
+
+    }
+
+}, 10000);
+
 
 </script>
 
