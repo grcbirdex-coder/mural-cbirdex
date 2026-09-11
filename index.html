@@ -61,7 +61,7 @@ type="video/mp4">
 
 <!-- ===================================================== -->
 <!-- SETEMBRO AMARELO -->
-<!-- Aparece somente de 01/09/2026 00:01 até 30/09/2026 -->
+<!-- Ativo de 01/09/2026 00:01 até 30/09/2026 23:59 -->
 <!-- ===================================================== -->
 
 <img
@@ -69,6 +69,17 @@ id="imagemSetembro"
 class="media"
 src="setembro-amarelo-2026.png"
 alt="Setembro Amarelo CBirdex">
+
+
+<!-- ===================================================== -->
+<!-- TREINAMENTO DE BRIGADA DE INCÊNDIO -->
+<!-- ===================================================== -->
+
+<img
+id="imagemBrigada"
+class="media"
+src="treinamento-brigada-incendio.jpeg"
+alt="Treinamento de Brigada de Incêndio">
 
 
 <!-- ===================================================== -->
@@ -119,7 +130,7 @@ alt="CBirdex FC">
    ===================================================== */
 
 /*
-   Tempo dos banners em milissegundos.
+   Tempo de exibição das imagens.
 
    18000 = 18 segundos
 */
@@ -155,6 +166,9 @@ const video1 =
 
 const imagemSetembro =
     document.getElementById("imagemSetembro");
+
+const imagemBrigada =
+    document.getElementById("imagemBrigada");
 
 const imagem1 =
     document.getElementById("imagem1");
@@ -226,21 +240,21 @@ function mostrarVideo1(){
    DEPOIS DO VÍDEO 1
    ===================================================== */
 
-/*
-   Durante setembro:
-   
-   Vídeo 1
-       ↓
-   Setembro Amarelo
-
-   Fora de setembro:
-
-   Vídeo 1
-       ↓
-   Mobilização
-*/
-
 function depoisDoVideo1(){
+
+    /*
+       Durante setembro:
+
+       Vídeo 1
+          ↓
+       Setembro Amarelo
+
+       Fora de setembro:
+
+       Vídeo 1
+          ↓
+       Brigada
+    */
 
     if(setembroAmareloAtivo()){
 
@@ -248,7 +262,7 @@ function depoisDoVideo1(){
 
     }else{
 
-        mostrarImagem1();
+        mostrarBrigada();
 
     }
 
@@ -262,12 +276,12 @@ function depoisDoVideo1(){
 function mostrarSetembro(){
 
     /*
-       Confere a data novamente antes de exibir.
+       Confere a data novamente.
     */
 
     if(!setembroAmareloAtivo()){
 
-        mostrarImagem1();
+        mostrarBrigada();
 
         return;
 
@@ -279,7 +293,31 @@ function mostrarSetembro(){
 
 
     /*
-       Mostra a campanha por 18 segundos.
+       Setembro Amarelo fica 18 segundos.
+    */
+
+    setTimeout(function(){
+
+        mostrarBrigada();
+
+    }, tempoImagem);
+
+}
+
+
+/* =====================================================
+   TREINAMENTO DE BRIGADA DE INCÊNDIO
+   ===================================================== */
+
+function mostrarBrigada(){
+
+    esconderTudo();
+
+    imagemBrigada.classList.add("ativo");
+
+
+    /*
+       Brigada fica 18 segundos.
     */
 
     setTimeout(function(){
@@ -303,7 +341,7 @@ function mostrarImagem1(){
 
 
     /*
-       Mostra o banner por 18 segundos.
+       Mobilização fica 18 segundos.
     */
 
     setTimeout(function(){
@@ -390,28 +428,24 @@ mostrarVideo1();
 
 
 /* =====================================================
-   VERIFICAÇÃO AUTOMÁTICA
+   VERIFICAÇÃO AUTOMÁTICA DE DATA
    ===================================================== */
 
 /*
-   Se o mural ficar aberto durante a virada do mês,
-   verifica a cada 10 segundos se a campanha ainda
-   está dentro do período.
+   Verifica a cada 10 segundos.
+
+   Se setembro terminar enquanto o mural estiver
+   aberto, a campanha será retirada automaticamente.
 */
 
 setInterval(function(){
-
-    /*
-       Se Setembro Amarelo não estiver mais ativo
-       e estiver sendo exibido, sai imediatamente.
-    */
 
     if(
         !setembroAmareloAtivo() &&
         imagemSetembro.classList.contains("ativo")
     ){
 
-        mostrarImagem1();
+        mostrarBrigada();
 
     }
 
