@@ -72,6 +72,17 @@ alt="Setembro Amarelo CBirdex">
 
 
 <!-- ===================================================== -->
+<!-- RH CBIRDEX - SETEMBRO AMARELO -->
+<!-- ===================================================== -->
+
+<img
+id="imagemRH"
+class="media"
+src="setembro-amarelo-rh-2026-750x220.png"
+alt="RH CBirdex Express - Setembro Amarelo">
+
+
+<!-- ===================================================== -->
 <!-- TREINAMENTO DE BRIGADA DE INCÊNDIO -->
 <!-- ===================================================== -->
 
@@ -167,6 +178,9 @@ const video1 =
 const imagemSetembro =
     document.getElementById("imagemSetembro");
 
+const imagemRH =
+    document.getElementById("imagemRH");
+
 const imagemBrigada =
     document.getElementById("imagemBrigada");
 
@@ -248,6 +262,10 @@ function depoisDoVideo1(){
        Vídeo 1
           ↓
        Setembro Amarelo
+          ↓
+       RH Setembro Amarelo
+          ↓
+       Brigada
 
        Fora de setembro:
 
@@ -276,7 +294,7 @@ function depoisDoVideo1(){
 function mostrarSetembro(){
 
     /*
-       Confere a data novamente.
+       Confere a data novamente antes de exibir.
     */
 
     if(!setembroAmareloAtivo()){
@@ -294,6 +312,43 @@ function mostrarSetembro(){
 
     /*
        Setembro Amarelo fica 18 segundos.
+    */
+
+    setTimeout(function(){
+
+        mostrarRH();
+
+    }, tempoImagem);
+
+}
+
+
+/* =====================================================
+   RH - SETEMBRO AMARELO
+   ===================================================== */
+
+function mostrarRH(){
+
+    /*
+       Confere novamente se ainda estamos
+       dentro do período de setembro.
+    */
+
+    if(!setembroAmareloAtivo()){
+
+        mostrarBrigada();
+
+        return;
+
+    }
+
+    esconderTudo();
+
+    imagemRH.classList.add("ativo");
+
+
+    /*
+       Banner do RH fica 18 segundos.
     */
 
     setTimeout(function(){
@@ -434,18 +489,22 @@ mostrarVideo1();
 /*
    Verifica a cada 10 segundos.
 
-   Se setembro terminar enquanto o mural estiver
-   aberto, a campanha será retirada automaticamente.
+   Se setembro terminar enquanto uma das campanhas
+   de setembro estiver sendo exibida, ela será retirada.
 */
 
 setInterval(function(){
 
-    if(
-        !setembroAmareloAtivo() &&
-        imagemSetembro.classList.contains("ativo")
-    ){
+    if(!setembroAmareloAtivo()){
 
-        mostrarBrigada();
+        if(
+            imagemSetembro.classList.contains("ativo") ||
+            imagemRH.classList.contains("ativo")
+        ){
+
+            mostrarBrigada();
+
+        }
 
     }
 
