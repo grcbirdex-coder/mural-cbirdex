@@ -41,7 +41,7 @@ html,body{
 
 
 <!-- ===================================================== -->
-<!-- VÍDEO 1 - INSTITUCIONAL -->
+<!-- VÍDEO INSTITUCIONAL -->
 <!-- ===================================================== -->
 
 <video
@@ -104,35 +104,6 @@ src="ChatGPT Image 3 de ago. de 2026, 14_44_24.png"
 alt="Mobilização Nacional SEST SENAT">
 
 
-<!-- ===================================================== -->
-<!-- VÍDEO VICE CAMPEÃO -->
-<!-- ===================================================== -->
-
-<video
-id="video2"
-class="media"
-muted
-playsinline
-preload="auto">
-
-<source
-src="video vice campeao 2026.mp4"
-type="video/mp4">
-
-</video>
-
-
-<!-- ===================================================== -->
-<!-- BANNER VICE CAMPEÃO -->
-<!-- ===================================================== -->
-
-<img
-id="imagem2"
-class="media"
-src="ChatGPT Image 4 de ago. de 2026, 18_19_37.png"
-alt="CBirdex FC">
-
-
 <script>
 
 
@@ -187,12 +158,6 @@ const imagemBrigada =
 const imagem1 =
     document.getElementById("imagem1");
 
-const video2 =
-    document.getElementById("video2");
-
-const imagem2 =
-    document.getElementById("imagem2");
-
 
 /* =====================================================
    VERIFICAR SETEMBRO AMARELO
@@ -234,7 +199,7 @@ function esconderTudo(){
 
 
 /* =====================================================
-   VÍDEO 1
+   VÍDEO INSTITUCIONAL
    ===================================================== */
 
 function mostrarVideo1(){
@@ -251,7 +216,7 @@ function mostrarVideo1(){
 
 
 /* =====================================================
-   DEPOIS DO VÍDEO 1
+   DEPOIS DO VÍDEO
    ===================================================== */
 
 function depoisDoVideo1(){
@@ -259,19 +224,27 @@ function depoisDoVideo1(){
     /*
        Durante setembro:
 
-       Vídeo 1
+       Vídeo
           ↓
        Setembro Amarelo
           ↓
-       RH Setembro Amarelo
+       RH
           ↓
        Brigada
+          ↓
+       Mobilização
+          ↓
+       Vídeo novamente
 
        Fora de setembro:
 
-       Vídeo 1
+       Vídeo
           ↓
        Brigada
+          ↓
+       Mobilização
+          ↓
+       Vídeo novamente
     */
 
     if(setembroAmareloAtivo()){
@@ -361,7 +334,7 @@ function mostrarRH(){
 
 
 /* =====================================================
-   TREINAMENTO DE BRIGADA DE INCÊNDIO
+   TREINAMENTO DE BRIGADA
    ===================================================== */
 
 function mostrarBrigada(){
@@ -385,7 +358,7 @@ function mostrarBrigada(){
 
 
 /* =====================================================
-   BANNER MOBILIZAÇÃO
+   MOBILIZAÇÃO SEST SENAT
    ===================================================== */
 
 function mostrarImagem1(){
@@ -397,47 +370,7 @@ function mostrarImagem1(){
 
     /*
        Mobilização fica 18 segundos.
-    */
-
-    setTimeout(function(){
-
-        mostrarVideo2();
-
-    }, tempoImagem);
-
-}
-
-
-/* =====================================================
-   VÍDEO VICE CAMPEÃO
-   ===================================================== */
-
-function mostrarVideo2(){
-
-    esconderTudo();
-
-    video2.classList.add("ativo");
-
-    video2.currentTime = 0;
-
-    video2.play().catch(function(){});
-
-}
-
-
-/* =====================================================
-   BANNER VICE CAMPEÃO
-   ===================================================== */
-
-function mostrarImagem2(){
-
-    esconderTudo();
-
-    imagem2.classList.add("ativo");
-
-
-    /*
-       Depois do banner, volta para o vídeo 1.
+       Depois retorna ao vídeo institucional.
     */
 
     setTimeout(function(){
@@ -450,27 +383,19 @@ function mostrarImagem2(){
 
 
 /* =====================================================
-   EVENTOS DOS VÍDEOS
+   EVENTO DO VÍDEO
    ===================================================== */
 
 video1.onended = depoisDoVideo1;
 
-video2.onended = mostrarImagem2;
-
 
 /* =====================================================
-   TRATAMENTO DE ERRO DOS VÍDEOS
+   TRATAMENTO DE ERRO DO VÍDEO
    ===================================================== */
 
 video1.onerror = function(){
 
     depoisDoVideo1();
-
-};
-
-video2.onerror = function(){
-
-    mostrarImagem2();
 
 };
 
@@ -490,7 +415,8 @@ mostrarVideo1();
    Verifica a cada 10 segundos.
 
    Se setembro terminar enquanto uma das campanhas
-   de setembro estiver sendo exibida, ela será retirada.
+   de setembro estiver sendo exibida, o mural passa
+   automaticamente para a Brigada.
 */
 
 setInterval(function(){
