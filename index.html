@@ -9,28 +9,28 @@
 
 <style>
 
-html,body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
 }
 
-.media{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    background:#000;
-    opacity:0;
-    transition:opacity 1s ease-in-out;
+.media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
-.media.ativo{
-    opacity:1;
+.media.ativo {
+    opacity: 1;
 }
 
 </style>
@@ -45,41 +45,49 @@ html,body{
 <!-- ===================================================== -->
 
 <video
-id="video1"
-class="media ativo"
-autoplay
-muted
-playsinline
-preload="auto">
+    id="video1"
+    class="media ativo"
+    autoplay
+    muted
+    playsinline
+    preload="auto">
 
-<source
-src="WhatsApp Video 2026-08-03 at 12.34.00.mp4"
-type="video/mp4">
+    <source
+        src="WhatsApp Video 2026-08-03 at 12.34.00.mp4"
+        type="video/mp4">
 
 </video>
 
 
 <!-- ===================================================== -->
-<!-- SETEMBRO AMARELO -->
-<!-- Ativo de 01/09/2026 00:01 até 30/09/2026 23:59 -->
+<!-- VÍDEO OUTUBRO ROSA -->
+<!-- ATIVO SOMENTE DURANTE OUTUBRO/2026 -->
+<!-- ===================================================== -->
+
+<video
+    id="videoOutubro"
+    class="media"
+    muted
+    playsinline
+    preload="auto">
+
+    <source
+        src="Video%20outubro%20rosa%20%281%29.mp4"
+        type="video/mp4">
+
+</video>
+
+
+<!-- ===================================================== -->
+<!-- IMAGEM OUTUBRO ROSA -->
+<!-- ATIVA SOMENTE DURANTE OUTUBRO/2026 -->
 <!-- ===================================================== -->
 
 <img
-id="imagemSetembro"
-class="media"
-src="setembro-amarelo-2026.png"
-alt="Setembro Amarelo CBirdex">
-
-
-<!-- ===================================================== -->
-<!-- RH CBIRDEX - SETEMBRO AMARELO -->
-<!-- ===================================================== -->
-
-<img
-id="imagemRH"
-class="media"
-src="setembro-amarelo-rh-2026-750x220.png"
-alt="RH CBirdex Express - Setembro Amarelo">
+    id="imagemOutubro"
+    class="media"
+    src="evento%20outubro%20rosa.jpeg"
+    alt="Outubro Rosa CBirdex">
 
 
 <!-- ===================================================== -->
@@ -87,10 +95,10 @@ alt="RH CBirdex Express - Setembro Amarelo">
 <!-- ===================================================== -->
 
 <img
-id="imagemBrigada"
-class="media"
-src="treinamento-brigada-incendio.jpeg"
-alt="Treinamento de Brigada de Incêndio">
+    id="imagemBrigada"
+    class="media"
+    src="treinamento-brigada-incendio.jpeg"
+    alt="Treinamento de Brigada de Incêndio">
 
 
 <!-- ===================================================== -->
@@ -98,10 +106,10 @@ alt="Treinamento de Brigada de Incêndio">
 <!-- ===================================================== -->
 
 <img
-id="imagem1"
-class="media"
-src="ChatGPT Image 3 de ago. de 2026, 14_44_24.png"
-alt="Mobilização Nacional SEST SENAT">
+    id="imagem1"
+    class="media"
+    src="ChatGPT Image 3 de ago. de 2026, 14_44_24.png"
+    alt="Mobilização Nacional SEST SENAT">
 
 
 <script>
@@ -113,7 +121,6 @@ alt="Mobilização Nacional SEST SENAT">
 
 /*
    Tempo de exibição das imagens.
-
    18000 = 18 segundos
 */
 
@@ -121,22 +128,14 @@ const tempoImagem = 18000;
 
 
 /* =====================================================
-   PERÍODO DO SETEMBRO AMARELO
+   PERÍODO DO OUTUBRO ROSA
    ===================================================== */
 
-/*
-   INÍCIO:
-   01/09/2026 às 00:01
+const inicioOutubro =
+    new Date("2026-10-01T00:00:00");
 
-   FIM:
-   30/09/2026 às 23:59:59
-*/
-
-const inicioSetembro =
-    new Date("2026-09-01T00:01:00");
-
-const fimSetembro =
-    new Date("2026-09-30T23:59:59.999");
+const fimOutubro =
+    new Date("2026-10-31T23:59:59.999");
 
 
 /* =====================================================
@@ -146,11 +145,11 @@ const fimSetembro =
 const video1 =
     document.getElementById("video1");
 
-const imagemSetembro =
-    document.getElementById("imagemSetembro");
+const videoOutubro =
+    document.getElementById("videoOutubro");
 
-const imagemRH =
-    document.getElementById("imagemRH");
+const imagemOutubro =
+    document.getElementById("imagemOutubro");
 
 const imagemBrigada =
     document.getElementById("imagemBrigada");
@@ -160,16 +159,16 @@ const imagem1 =
 
 
 /* =====================================================
-   VERIFICAR SETEMBRO AMARELO
+   VERIFICAR OUTUBRO ROSA
    ===================================================== */
 
-function setembroAmareloAtivo(){
+function outubroRosaAtivo() {
 
     const agora = new Date();
 
     return (
-        agora >= inicioSetembro &&
-        agora <= fimSetembro
+        agora >= inicioOutubro &&
+        agora <= fimOutubro
     );
 
 }
@@ -179,15 +178,15 @@ function setembroAmareloAtivo(){
    ESCONDER TUDO
    ===================================================== */
 
-function esconderTudo(){
+function esconderTudo() {
 
     document
         .querySelectorAll(".media")
-        .forEach(function(item){
+        .forEach(function(item) {
 
             item.classList.remove("ativo");
 
-            if(item.tagName === "VIDEO"){
+            if (item.tagName === "VIDEO") {
 
                 item.pause();
 
@@ -202,7 +201,7 @@ function esconderTudo(){
    VÍDEO INSTITUCIONAL
    ===================================================== */
 
-function mostrarVideo1(){
+function mostrarVideo1() {
 
     esconderTudo();
 
@@ -210,67 +209,23 @@ function mostrarVideo1(){
 
     video1.currentTime = 0;
 
-    video1.play().catch(function(){});
+    video1.play().catch(function() {});
 
 }
 
 
 /* =====================================================
-   DEPOIS DO VÍDEO
+   VÍDEO OUTUBRO ROSA
    ===================================================== */
 
-function depoisDoVideo1(){
+function mostrarVideoOutubro() {
 
     /*
-       Durante setembro:
-
-       Vídeo
-          ↓
-       Setembro Amarelo
-          ↓
-       RH
-          ↓
-       Brigada
-          ↓
-       Mobilização
-          ↓
-       Vídeo novamente
-
-       Fora de setembro:
-
-       Vídeo
-          ↓
-       Brigada
-          ↓
-       Mobilização
-          ↓
-       Vídeo novamente
+       Se outubro já terminou,
+       pula diretamente para a Brigada.
     */
 
-    if(setembroAmareloAtivo()){
-
-        mostrarSetembro();
-
-    }else{
-
-        mostrarBrigada();
-
-    }
-
-}
-
-
-/* =====================================================
-   SETEMBRO AMARELO
-   ===================================================== */
-
-function mostrarSetembro(){
-
-    /*
-       Confere a data novamente antes de exibir.
-    */
-
-    if(!setembroAmareloAtivo()){
+    if (!outubroRosaAtivo()) {
 
         mostrarBrigada();
 
@@ -280,34 +235,27 @@ function mostrarSetembro(){
 
     esconderTudo();
 
-    imagemSetembro.classList.add("ativo");
+    videoOutubro.classList.add("ativo");
 
+    videoOutubro.currentTime = 0;
 
-    /*
-       Setembro Amarelo fica 18 segundos.
-    */
-
-    setTimeout(function(){
-
-        mostrarRH();
-
-    }, tempoImagem);
+    videoOutubro.play().catch(function() {});
 
 }
 
 
 /* =====================================================
-   RH - SETEMBRO AMARELO
+   IMAGEM OUTUBRO ROSA
    ===================================================== */
 
-function mostrarRH(){
+function mostrarImagemOutubro() {
 
     /*
-       Confere novamente se ainda estamos
-       dentro do período de setembro.
+       Se outubro já terminou,
+       pula diretamente para a Brigada.
     */
 
-    if(!setembroAmareloAtivo()){
+    if (!outubroRosaAtivo()) {
 
         mostrarBrigada();
 
@@ -317,14 +265,9 @@ function mostrarRH(){
 
     esconderTudo();
 
-    imagemRH.classList.add("ativo");
+    imagemOutubro.classList.add("ativo");
 
-
-    /*
-       Banner do RH fica 18 segundos.
-    */
-
-    setTimeout(function(){
+    setTimeout(function() {
 
         mostrarBrigada();
 
@@ -337,18 +280,13 @@ function mostrarRH(){
    TREINAMENTO DE BRIGADA
    ===================================================== */
 
-function mostrarBrigada(){
+function mostrarBrigada() {
 
     esconderTudo();
 
     imagemBrigada.classList.add("ativo");
 
-
-    /*
-       Brigada fica 18 segundos.
-    */
-
-    setTimeout(function(){
+    setTimeout(function() {
 
         mostrarImagem1();
 
@@ -361,19 +299,13 @@ function mostrarBrigada(){
    MOBILIZAÇÃO SEST SENAT
    ===================================================== */
 
-function mostrarImagem1(){
+function mostrarImagem1() {
 
     esconderTudo();
 
     imagem1.classList.add("ativo");
 
-
-    /*
-       Mobilização fica 18 segundos.
-       Depois retorna ao vídeo institucional.
-    */
-
-    setTimeout(function(){
+    setTimeout(function() {
 
         mostrarVideo1();
 
@@ -383,19 +315,81 @@ function mostrarImagem1(){
 
 
 /* =====================================================
-   EVENTO DO VÍDEO
+   FINAL DO VÍDEO INSTITUCIONAL
    ===================================================== */
 
-video1.onended = depoisDoVideo1;
+video1.onended = function() {
+
+    /*
+       Durante outubro:
+       Vídeo institucional
+       ↓
+       Vídeo Outubro Rosa
+
+       Depois de outubro:
+       Vídeo institucional
+       ↓
+       Brigada
+    */
+
+    if (outubroRosaAtivo()) {
+
+        mostrarVideoOutubro();
+
+    } else {
+
+        mostrarBrigada();
+
+    }
+
+};
 
 
 /* =====================================================
-   TRATAMENTO DE ERRO DO VÍDEO
+   FINAL DO VÍDEO OUTUBRO ROSA
    ===================================================== */
 
-video1.onerror = function(){
+videoOutubro.onended = function() {
 
-    depoisDoVideo1();
+    if (outubroRosaAtivo()) {
+
+        mostrarImagemOutubro();
+
+    } else {
+
+        mostrarBrigada();
+
+    }
+
+};
+
+
+/* =====================================================
+   ERRO NO VÍDEO INSTITUCIONAL
+   ===================================================== */
+
+video1.onerror = function() {
+
+    if (outubroRosaAtivo()) {
+
+        mostrarVideoOutubro();
+
+    } else {
+
+        mostrarBrigada();
+
+    }
+
+};
+
+
+/* =====================================================
+   ERRO NO VÍDEO OUTUBRO ROSA
+   ===================================================== */
+
+videoOutubro.onerror = function() {
+
+    mostrarImagemOutubro();
 
 };
 
@@ -408,25 +402,25 @@ mostrarVideo1();
 
 
 /* =====================================================
-   VERIFICAÇÃO AUTOMÁTICA DE DATA
+   VERIFICAÇÃO AUTOMÁTICA DA DATA
    ===================================================== */
 
 /*
    Verifica a cada 10 segundos.
 
-   Se setembro terminar enquanto uma das campanhas
-   de setembro estiver sendo exibida, o mural passa
-   automaticamente para a Brigada.
+   Se chegar novembro enquanto o conteúdo
+   do Outubro Rosa estiver sendo exibido,
+   o mural passa automaticamente para a Brigada.
 */
 
-setInterval(function(){
+setInterval(function() {
 
-    if(!setembroAmareloAtivo()){
+    if (!outubroRosaAtivo()) {
 
-        if(
-            imagemSetembro.classList.contains("ativo") ||
-            imagemRH.classList.contains("ativo")
-        ){
+        if (
+            videoOutubro.classList.contains("ativo") ||
+            imagemOutubro.classList.contains("ativo")
+        ) {
 
             mostrarBrigada();
 
